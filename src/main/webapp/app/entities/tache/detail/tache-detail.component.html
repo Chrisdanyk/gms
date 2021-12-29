@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tache">
+      <h2 data-cy="tacheDetailsHeading"><span jhiTranslate="gmsApp.tache.detail.title">Tache</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tache.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.nom">Nom</span></dt>
+        <dd>
+          <span>{{ tache.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.prixUnitaire">Prix Unitaire</span></dt>
+        <dd>
+          <span>{{ tache.prixUnitaire }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.description">Description</span></dt>
+        <dd>
+          <span>{{ tache.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.disponible">Disponible</span></dt>
+        <dd>
+          <span>{{ tache.disponible }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.nuid">Nuid</span></dt>
+        <dd>
+          <span>{{ tache.nuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.tache.garage">Garage</span></dt>
+        <dd>
+          <div *ngIf="tache.garage">
+            <a [routerLink]="['/garage', tache.garage?.id, 'view']">{{ tache.garage?.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tache', tache.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

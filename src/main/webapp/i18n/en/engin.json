@@ -1,0 +1,28 @@
+{
+  "gmsApp": {
+    "engin": {
+      "home": {
+        "title": "Engins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Engin",
+        "createOrEditLabel": "Create or edit a Engin",
+        "notFound": "No Engins found"
+      },
+      "created": "A new Engin is created with identifier {{ param }}",
+      "updated": "A Engin is updated with identifier {{ param }}",
+      "deleted": "A Engin is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Engin {{ id }}?"
+      },
+      "detail": {
+        "title": "Engin"
+      },
+      "id": "ID",
+      "modele": "Modele",
+      "plaque": "Plaque",
+      "dateFabrication": "Date Fabrication",
+      "type": "Type",
+      "proprietaire": "Proprietaire"
+    }
+  }
+}

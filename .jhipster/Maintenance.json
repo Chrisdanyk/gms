@@ -1,0 +1,68 @@
+{
+  "name": "Maintenance",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "rapportGlobal",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "prixTotal",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "discountTotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "nuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "maintenance",
+      "relationshipName": "notification",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "engin",
+      "otherEntityRelationshipName": "maintenance",
+      "relationshipName": "engin",
+      "otherEntityField": "plaque"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "operation",
+      "otherEntityRelationshipName": "maintenance",
+      "relationshipName": "operation",
+      "otherEntityField": "nuid",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "maintenance",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["gms"],
+  "changelogDate": "20211229232928"
+}

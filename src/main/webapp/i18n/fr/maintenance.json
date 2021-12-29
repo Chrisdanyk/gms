@@ -1,0 +1,32 @@
+{
+  "gmsApp": {
+    "maintenance": {
+      "home": {
+        "title": "Maintenances",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Maintenance",
+        "createOrEditLabel": "Créer ou éditer un Maintenance",
+        "notFound": "Aucun Maintenance trouvé"
+      },
+      "created": "Un nouveau Maintenance a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Maintenance avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Maintenance avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Maintenance {{ id }} ?"
+      },
+      "detail": {
+        "title": "Maintenance"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "rapportGlobal": "Rapport Global",
+      "prixTotal": "Prix Total",
+      "discountTotal": "Discount Total",
+      "nuid": "Nuid",
+      "notification": "Notification",
+      "engin": "Engin",
+      "operation": "Operation"
+    }
+  }
+}

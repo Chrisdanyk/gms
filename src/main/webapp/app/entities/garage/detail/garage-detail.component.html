@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="garage">
+      <h2 data-cy="garageDetailsHeading"><span jhiTranslate="gmsApp.garage.detail.title">Garage</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ garage.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.nom">Nom</span></dt>
+        <dd>
+          <span>{{ garage.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.addresse">Addresse</span></dt>
+        <dd>
+          <span>{{ garage.addresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.email">Email</span></dt>
+        <dd>
+          <span>{{ garage.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ garage.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.rccm">Rccm</span></dt>
+        <dd>
+          <span>{{ garage.rccm }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.url">Url</span></dt>
+        <dd>
+          <span>{{ garage.url }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.nuid">Nuid</span></dt>
+        <dd>
+          <span>{{ garage.nuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.garage.utilisateur">Utilisateur</span></dt>
+        <dd>
+          <span *ngFor="let utilisateur of garage.utilisateurs; let last = last"> {{ utilisateur.login }}{{ last ? '' : ', ' }} </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/garage', garage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+{
+  "name": "Operation",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "nuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "operation",
+      "relationshipName": "mecanicien",
+      "otherEntityField": "login",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "tache",
+      "otherEntityRelationshipName": "operation",
+      "relationshipName": "tache",
+      "otherEntityField": "nuid",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "maintenance",
+      "otherEntityRelationshipName": "operation",
+      "relationshipName": "maintenance",
+      "otherEntityField": "nuid",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "operation",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["gms"],
+  "changelogDate": "20211229233128"
+}

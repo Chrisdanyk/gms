@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="engin">
+      <h2 data-cy="enginDetailsHeading"><span jhiTranslate="gmsApp.engin.detail.title">Engin</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ engin.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.engin.modele">Modele</span></dt>
+        <dd>
+          <span>{{ engin.modele }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.engin.plaque">Plaque</span></dt>
+        <dd>
+          <span>{{ engin.plaque }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.engin.dateFabrication">Date Fabrication</span></dt>
+        <dd>
+          <span>{{ engin.dateFabrication | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.engin.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gmsApp.Type.' + engin.type }}">{{ engin.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.engin.proprietaire">Proprietaire</span></dt>
+        <dd>
+          <span>{{ engin.proprietaire?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/engin', engin.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

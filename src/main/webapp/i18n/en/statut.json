@@ -1,0 +1,9 @@
+{
+  "gmsApp": {
+    "Statut": {
+      "null": "",
+      "ENVOYE": "ENVOYE",
+      "EN_COURS": "EN_COURS"
+    }
+  }
+}
