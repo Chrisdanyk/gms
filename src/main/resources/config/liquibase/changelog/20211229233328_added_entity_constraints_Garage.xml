@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Garage.
+    -->
+    <changeSet id="20211229233328-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="garage_id"
+                                 baseTableName="rel_garage__utilisateur"
+                                 constraintName="fk_rel_garage__utilisateur__garage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garage"/>
+
+        <addForeignKeyConstraint baseColumnNames="utilisateur_id"
+                                 baseTableName="rel_garage__utilisateur"
+                                 constraintName="fk_rel_garage__utilisateur__utilisateur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

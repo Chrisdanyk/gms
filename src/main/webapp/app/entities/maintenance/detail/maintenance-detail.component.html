@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="maintenance">
+      <h2 data-cy="maintenanceDetailsHeading"><span jhiTranslate="gmsApp.maintenance.detail.title">Maintenance</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ maintenance.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ maintenance.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ maintenance.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.rapportGlobal">Rapport Global</span></dt>
+        <dd>
+          <span>{{ maintenance.rapportGlobal }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.prixTotal">Prix Total</span></dt>
+        <dd>
+          <span>{{ maintenance.prixTotal }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.discountTotal">Discount Total</span></dt>
+        <dd>
+          <span>{{ maintenance.discountTotal }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.nuid">Nuid</span></dt>
+        <dd>
+          <span>{{ maintenance.nuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.notification">Notification</span></dt>
+        <dd>
+          <div *ngIf="maintenance.notification">
+            <a [routerLink]="['/notification', maintenance.notification?.id, 'view']">{{ maintenance.notification?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.engin">Engin</span></dt>
+        <dd>
+          <div *ngIf="maintenance.engin">
+            <a [routerLink]="['/engin', maintenance.engin?.id, 'view']">{{ maintenance.engin?.plaque }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gmsApp.maintenance.operation">Operation</span></dt>
+        <dd>
+          <span *ngFor="let operation of maintenance.operations; let last = last">
+            <a [routerLink]="['/operation', operation?.id, 'view']">{{ operation.nuid }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/maintenance', maintenance.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

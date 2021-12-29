@@ -1,0 +1,186 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-maintenance-heading" data-cy="MaintenanceCreateUpdateHeading" jhiTranslate="gmsApp.maintenance.home.createOrEditLabel">
+        Create or edit a Maintenance
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.dateDebut" for="field_dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.dateFin" for="field_dateFin">Date Fin</label>
+          <div class="input-group">
+            <input
+              id="field_dateFin"
+              data-cy="dateFin"
+              type="text"
+              class="form-control"
+              name="dateFin"
+              ngbDatepicker
+              #dateFinDp="ngbDatepicker"
+              formControlName="dateFin"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateFinDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('dateFin')!.invalid && (editForm.get('dateFin')!.dirty || editForm.get('dateFin')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateFin')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.rapportGlobal" for="field_rapportGlobal">Rapport Global</label>
+          <textarea
+            class="form-control"
+            name="rapportGlobal"
+            id="field_rapportGlobal"
+            data-cy="rapportGlobal"
+            formControlName="rapportGlobal"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.prixTotal" for="field_prixTotal">Prix Total</label>
+          <input type="number" class="form-control" name="prixTotal" id="field_prixTotal" data-cy="prixTotal" formControlName="prixTotal" />
+          <div *ngIf="editForm.get('prixTotal')!.invalid && (editForm.get('prixTotal')!.dirty || editForm.get('prixTotal')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prixTotal')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('prixTotal')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.discountTotal" for="field_discountTotal">Discount Total</label>
+          <input
+            type="number"
+            class="form-control"
+            name="discountTotal"
+            id="field_discountTotal"
+            data-cy="discountTotal"
+            formControlName="discountTotal"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.nuid" for="field_nuid">Nuid</label>
+          <input type="text" class="form-control" name="nuid" id="field_nuid" data-cy="nuid" formControlName="nuid" />
+          <div *ngIf="editForm.get('nuid')!.invalid && (editForm.get('nuid')!.dirty || editForm.get('nuid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nuid')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.notification" for="field_notification">Notification</label>
+          <select class="form-control" id="field_notification" data-cy="notification" name="notification" formControlName="notification">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                notificationOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : notificationOption
+              "
+              *ngFor="let notificationOption of notificationsCollection; trackBy: trackNotificationById"
+            >
+              {{ notificationOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.maintenance.engin" for="field_engin">Engin</label>
+          <select class="form-control" id="field_engin" data-cy="engin" name="engin" formControlName="engin">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="enginOption.id === editForm.get('engin')!.value?.id ? editForm.get('engin')!.value : enginOption"
+              *ngFor="let enginOption of enginsSharedCollection; trackBy: trackEnginById"
+            >
+              {{ enginOption.plaque }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="gmsApp.maintenance.operation" for="field_operations">Operation</label>
+          <select class="form-control" id="field_operations" data-cy="operation" multiple name="operations" formControlName="operations">
+            <option
+              [ngValue]="getSelectedOperation(operationOption, editForm.get('operations')!.value)"
+              *ngFor="let operationOption of operationsSharedCollection; trackBy: trackOperationById"
+            >
+              {{ operationOption.nuid }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

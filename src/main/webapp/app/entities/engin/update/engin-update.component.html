@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-engin-heading" data-cy="EnginCreateUpdateHeading" jhiTranslate="gmsApp.engin.home.createOrEditLabel">
+        Create or edit a Engin
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.engin.modele" for="field_modele">Modele</label>
+          <input type="text" class="form-control" name="modele" id="field_modele" data-cy="modele" formControlName="modele" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.engin.plaque" for="field_plaque">Plaque</label>
+          <input type="text" class="form-control" name="plaque" id="field_plaque" data-cy="plaque" formControlName="plaque" />
+          <div *ngIf="editForm.get('plaque')!.invalid && (editForm.get('plaque')!.dirty || editForm.get('plaque')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('plaque')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.engin.dateFabrication" for="field_dateFabrication">Date Fabrication</label>
+          <div class="input-group">
+            <input
+              id="field_dateFabrication"
+              data-cy="dateFabrication"
+              type="text"
+              class="form-control"
+              name="dateFabrication"
+              ngbDatepicker
+              #dateFabricationDp="ngbDatepicker"
+              formControlName="dateFabrication"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateFabricationDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.engin.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'gmsApp.Type.null' | translate }}</option>
+            <option *ngFor="let type of typeValues" [value]="type">{{ 'gmsApp.Type.' + type | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="gmsApp.engin.proprietaire" for="field_proprietaire">Proprietaire</label>
+          <select class="form-control" id="field_proprietaire" data-cy="proprietaire" name="proprietaire" formControlName="proprietaire">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('proprietaire')!.value?.id ? editForm.get('proprietaire')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

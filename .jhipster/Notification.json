@@ -1,0 +1,44 @@
+{
+  "name": "Notification",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "Statut",
+      "fieldValues": "ENVOYE,EN_COURS",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateProchaineMaintenance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "maintenance",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "maintenance",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "notification",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["gms"],
+  "changelogDate": "20211229233028"
+}

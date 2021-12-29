@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="GarageHeading">
+    <span jhiTranslate="gmsApp.garage.home.title">Garages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gmsApp.garage.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-garage"
+        [routerLink]="['/garage/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gmsApp.garage.home.createLabel"> Create a new Garage </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="garages?.length === 0">
+    <span jhiTranslate="gmsApp.garage.home.notFound">No garages found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="garages && garages.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nom"><span jhiTranslate="gmsApp.garage.nom">Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="addresse">
+            <span jhiTranslate="gmsApp.garage.addresse">Addresse</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="email"><span jhiTranslate="gmsApp.garage.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telephone">
+            <span jhiTranslate="gmsApp.garage.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rccm"><span jhiTranslate="gmsApp.garage.rccm">Rccm</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="url"><span jhiTranslate="gmsApp.garage.url">Url</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nuid"><span jhiTranslate="gmsApp.garage.nuid">Nuid</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let garage of garages; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/garage', garage.id, 'view']">{{ garage.id }}</a>
+          </td>
+          <td>{{ garage.nom }}</td>
+          <td>{{ garage.addresse }}</td>
+          <td>{{ garage.email }}</td>
+          <td>{{ garage.telephone }}</td>
+          <td>{{ garage.rccm }}</td>
+          <td>{{ garage.url }}</td>
+          <td>{{ garage.nuid }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/garage', garage.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/garage', garage.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(garage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="garages && garages.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

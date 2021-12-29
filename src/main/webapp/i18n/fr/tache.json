@@ -1,0 +1,30 @@
+{
+  "gmsApp": {
+    "tache": {
+      "home": {
+        "title": "Taches",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Tache",
+        "createOrEditLabel": "Créer ou éditer un Tache",
+        "notFound": "Aucun Tache trouvé"
+      },
+      "created": "Un nouveau Tache a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Tache avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Tache avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Tache {{ id }} ?"
+      },
+      "detail": {
+        "title": "Tache"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prixUnitaire": "Prix Unitaire",
+      "description": "Description",
+      "disponible": "Disponible",
+      "nuid": "Nuid",
+      "garage": "Garage",
+      "operation": "Operation"
+    }
+  }
+}

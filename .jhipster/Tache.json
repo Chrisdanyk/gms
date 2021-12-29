@@ -1,0 +1,56 @@
+{
+  "name": "Tache",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prixUnitaire",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponible",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "garage",
+      "otherEntityRelationshipName": "tache",
+      "relationshipName": "garage",
+      "otherEntityField": "nom"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "operation",
+      "otherEntityRelationshipName": "tache",
+      "relationshipName": "operation",
+      "otherEntityField": "nuid",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "tache",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["gms"],
+  "changelogDate": "20211229233228"
+}
