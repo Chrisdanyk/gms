@@ -29,6 +29,8 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="taches && taches.length > 0">
+    <span jhiTranslate="logs.filter">Filter</span>
+    <input type="text" [(ngModel)]="filter" (ngModelChange)="filterAndSort()" class="form-control" />
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">

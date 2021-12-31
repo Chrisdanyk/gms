@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ITache } from '../tache.model';
+import { ITache, Tache } from '../tache.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { TacheService } from '../service/tache.service';
@@ -15,14 +15,18 @@ import { TacheDeleteDialogComponent } from '../delete/tache-delete-dialog.compon
   templateUrl: './tache.component.html',
 })
 export class TacheComponent implements OnInit {
+  filteredAndOrderedTaches?: ITache[];
   taches?: ITache[];
+  filter = '';
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
   page?: number;
   predicate!: string;
-  ascending!: boolean;
+  // ascending!: boolean;
   ngbPaginationPage = 1;
+  orderProp: keyof Tache = 'nom';
+  ascending = true;
 
   constructor(
     protected tacheService: TacheService,
@@ -70,6 +74,44 @@ export class TacheComponent implements OnInit {
         this.loadPage();
       }
     });
+  }
+
+  filterAndSort(): void {
+    this.filteredAndOrderedTaches = this.taches!.filter(t => !this.filter || t.nom!.toLowerCase().includes(this.filter.toLowerCase()));
+    if (typeof this.filteredAndOrderedTaches !== 'undefined') {
+      if (this.filteredAndOrderedTaches.length > 0) {
+        this.taches = this.filteredAndOrderedTaches;
+      }
+      if (this.filteredAndOrderedTaches.length === 0) {
+        this.taches = [];
+      }
+    } else {
+      this.loadPage();
+    }
+    if (!this.filter) {
+      this.loadPage();
+    }
+  }
+
+  public search(key: string): void {
+    const results: ITache[] = [];
+    for (const tache of this.taches!) {
+      if (
+        tache.nom?.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        tache.nuid?.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        tache.description?.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        tache.garage?.nom?.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      ) {
+        results.push(tache);
+      }
+    }
+    console.error('results >>>', results.length);
+    console.error('taches >>>', this.taches);
+
+    this.taches = results;
+    if (results.length === 0 || !key) {
+      this.loadPage();
+    }
   }
 
   protected sort(): string[] {
